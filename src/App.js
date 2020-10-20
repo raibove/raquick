@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Customers from './customer/pages/Customers';
+import DisplayStocks from './stock/pages/DisplayStocks';
+import Landing from './landing/pages/Landing';
+import AgentProfile from './agent/pages/AgentProfile';
+import Stocks from './scan/pages/Scan';
 
+const App = ()=> {
+  return (
+    <Router>
+      <Switch>
+      <Route path="/" exact>
+        <Landing />
+      </Route>
+      <Route path="/customers/display" exact>
+        <Customers />
+      </Route>
+      <Route path="/scan" exact>
+        <Stocks />
+      </Route>
+      <Route path="/stocks" exact>
+        <DisplayStocks />
+      </Route>
+      <Route path="/agent" exact>
+        <AgentProfile  />
+      </Route>
+      <Redirect to="/"/>
+      </Switch>
+    </Router>
+  );
+};
 export default App;

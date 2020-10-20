@@ -1,0 +1,13 @@
+.header-scan{
+    background-color: #4a41f3;
+    height: 8vh;
+    width: 100vw;
+}
+
+.footer-scan{
+    background-color: #4a41f3;
+    height: 5vh;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+}
