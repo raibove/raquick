@@ -1,0 +1,25 @@
+.header-auth{
+    background-color: #4a41f3;
+    height: 8vh;
+    width: 100vw;
+}
+
+.footer-auth{
+    background-color: #4a41f3;
+    height: 5vh;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+}
+.login-div{
+    background-color: rgb(250, 241, 241);
+    width: 100%;
+    height: 88vh;
+    padding-top: 10vh;
+}
+
+.Login{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 500;
+}

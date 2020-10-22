@@ -8,6 +8,7 @@ import DisplayStocks from './stock/pages/DisplayStocks';
 import Landing from './landing/pages/Landing';
 import AgentProfile from './agent/pages/AgentProfile';
 import Stocks from './scan/pages/Scan';
+import Auth from './agent/pages/Auth';
 
 const App = ()=> {
   return (
@@ -27,6 +28,9 @@ const App = ()=> {
       </Route>
       <Route path="/agent" exact>
         <AgentProfile  />
+      </Route>
+      <Route path="/auth" exact>
+        <Auth />
       </Route>
       <Redirect to="/"/>
       </Switch>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import './Landing.css';
 
 import illustration from './design2.png';
@@ -9,7 +9,7 @@ const Header = () => {
             <span className="HeaderTitle">
                 One Nation One Ration Card
             </span>
-            <button className="AgentLogin">Agent Login</button>
+            <button className="AgentLogin"><Link to="/auth" className="text-link">Agent Login</Link></button>
         </div>
     );
 };
