@@ -1,0 +1,79 @@
+* {box-sizing: border-box;}
+
+  .container{
+      height: 100vh;
+  }
+.header{
+    overflow: hidden;
+    background-color:#4a41f3;
+    padding: 2vh 1vw;
+}
+
+.footer{
+    background-color: #4a41f3;
+    height: 8vh;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+}
+.HeaderTitle{
+    font-size: 2.8rem;
+    color: #ffffff;
+    font-family: 'Times New Roman', Times, serif;   
+}
+
+.AgentLogin{
+    font-size: 1.6rem;
+    float:right;
+    padding: 1.4vh 2vw;
+    border-radius: 2rem;
+    outline: none;
+    background-color: #ffffff;
+    font-weight: bold;
+    color: #4a41f3;
+}
+
+.AgentLogin:hover{
+    color: white;
+    background-color: #4a41f3;
+    border: white solid;
+}
+.image1{
+    float: right;
+    height: 60vh;
+}
+
+.Tagline{
+    color:#4a41f3;
+    font-family: cursive;
+    font-style: italic;
+    font-size: 2.5rem;
+    margin-top: 15vh;
+    margin-left: 10vw;
+    line-height: 12vh;
+}
+@media screen and (max-width: 500px) {
+    .HeaderTitle{
+        font-size: 1.5rem;
+        padding: 0 4vw;
+    }
+    .AgentLogin{
+        font-size: 1.1rem;
+        padding: 1vh 3.5vw;
+        
+        margin-top:10px;
+    }
+
+    .image1{
+        content: url('./designMobile.png');
+        height: 25vh;
+        margin: 2vh auto;
+        float: unset;
+        display: block;
+    }
+    .Tagline{
+        font-size: 1.7rem;
+        line-height: 8vh;
+        margin-top: 1vh ;
+    }
+}
