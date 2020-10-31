@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-do
 import Axios from "axios";
 import './App.css';
 
+import ProtectedRoute from './ProtectedRoutes';
 import Customers from './customer/pages/Customers';
 import DisplayStocks from './stock/pages/DisplayStocks';
 import Landing from './landing/pages/Landing';
 import AgentProfile from './agent/pages/AgentProfile';
 import Stocks from './scan/pages/Scan';
 import Auth from './autherization/pages/Auth';
+import Scan from './scan/pages/Scan';
 
 
 const App = ()=> {
@@ -28,21 +30,12 @@ const App = ()=> {
       <Route path="/" exact>
         <Landing />
       </Route>
-      <Route path="/customers/display" exact>
-        <Customers />
-      </Route>
-      <Route path="/scan" exact>
-        <Stocks />
-      </Route>
-      <Route path="/stocks" exact>
-        <DisplayStocks />
-      </Route>
-      <Route path="/agent" exact>
-        <AgentProfile  />
-      </Route>
-      <Route path="/auth" exact>
-        <Auth />
-      </Route>
+      <Route path="/auth" component={Auth} exact />
+      <ProtectedRoute path="/agent" component={AgentProfile} exact/>
+      <ProtectedRoute path="/customers/display" component={Customers} exact />
+      <ProtectedRoute path="/scan" exact component={Scan}/>
+      <ProtectedRoute path="/stocks" component={DisplayStocks} exact />
+          
       <Redirect to="/"/>
       </Switch>
     </Router>

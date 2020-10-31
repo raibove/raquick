@@ -68,6 +68,7 @@ router.post("/auth",(req,res,next)=> {
             if(isMatch){
                 // admin matched create jwt payload
                 const payload = {
+                    id: admin.id,
                     username: admin.username
                 };
 

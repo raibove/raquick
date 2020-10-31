@@ -1,38 +1,37 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import './AgentProfile.css'
 
 import shop from '../image1.svg';
 
-const Header = ()=>{
+const Header = (props)=>{
     return(
-        <div class="header-agent">
-            <span class="greet">Welocme Agent!</span>
-            <button className="sign-out">Sign-Out</button>
-        </div>
+        <div className="header-agent">
+            <span className="greet">Welocme Agent!</span>
+         </div>
     );
 };
 
 
 const Buttons = ()=>{
     return(
-        <ul class="button-holder">
+        <ul className="button-holder">
             <li><Link to="/customers/display" className='text-link'>Customers</Link></li>
             <li><Link to="/stocks" className="text-link">Check Stock</Link></li>
             <li><Link to="/scan" className="text-link">Scan QR</Link></li>
         </ul>
     );
 };
-const AgentProfile = ()=>{
+const AgentProfile = (props)=>{
     return(
-        <div  class="main-page">
-       
-        <Header />
-        <Buttons />
-        <img src={shop} class="shop" alt="shop"></img>
+        <div  className="main-page">
+            <button className="sign-out" onClick={()=>{localStorage.removeItem('token'); props.history.push('/'); }}>Sign-Out</button>
+            <Header />
+            <Buttons />
+            <img src={shop} className="shop" alt="shop"></img>
         </div>
     );
 };
 
-export default AgentProfile;
+export default withRouter(AgentProfile);

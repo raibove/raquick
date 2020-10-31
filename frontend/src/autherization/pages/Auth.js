@@ -1,7 +1,9 @@
 import React from 'react';
+import { withRouter,Redirect} from 'react-router-dom';
 
 import { useFormik  } from 'formik';
 import Axios from 'axios';
+import jwt_decode from 'jwt-decode';
 
 import './Auth.css';
 
@@ -19,7 +21,11 @@ const validate = values => {
     return errors;
 
 }
-const Auth = ()=>{
+const Auth = (props)=>{
+    const isAuthenticated = localStorage.getItem('token');
+       
+   
+    
 
     const formik = useFormik({
         initialValues: {
@@ -32,19 +38,33 @@ const Auth = ()=>{
         console.log(values.username,values.password)
     
 
-        Axios.post('http://localhost:5000/auth',{
+        Axios.post('/auth',{
             username:values.username,
             password:values.password
         })
         .then(response => {
+            // Save to Local Storage
+            //Set token to Local Storage
+            const {token} = response.data;
+            localStorage.setItem('token',token);
+            console.log(token);
+
+            // Decode token to get user data
+            const decoded = jwt_decode(token);
+            console.log(decoded);
+            props.history.push('/agent');
+
+            /*
             console.log(response)
             console.log(response.data)
+            
             if(response.data){
                 console.log('successful signip');
             }
             else{
                 console.log("sign-in error");
             }
+            */
         }).catch(error=>{
             console.log('sign in server error: ')
             console.log(error.response)
@@ -52,8 +72,9 @@ const Auth = ()=>{
         }, 
     });
 
-
-    return(
+    return isAuthenticated ? (
+         <Redirect to="/login" />
+     ) : (
         <React.Fragment>
             <div className="auth-div">
                 <form onSubmit={formik.handleSubmit}>
@@ -95,6 +116,7 @@ const Auth = ()=>{
             </div>
         </React.Fragment>
     );
+    
 };
 
-export default Auth;
+export default withRouter(Auth);
