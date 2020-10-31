@@ -30,7 +30,7 @@ const AgentProfile = ()=>{
        
         <Header />
         <Buttons />
-        <img src={shop} class="shop"></img>
+        <img src={shop} class="shop" alt="shop"></img>
         </div>
     );
 };

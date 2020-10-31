@@ -9,11 +9,11 @@ import DisplayStocks from './stock/pages/DisplayStocks';
 import Landing from './landing/pages/Landing';
 import AgentProfile from './agent/pages/AgentProfile';
 import Stocks from './scan/pages/Scan';
-import Auth from './agent/pages/Auth';
+import Auth from './autherization/pages/Auth';
 
 
 const App = ()=> {
-  Axios({
+  /*Axios({
     method: "GET",
     url: "http://localhost:5000/",
     headers: {
@@ -21,7 +21,7 @@ const App = ()=> {
     }
   }).then(res => {
     console.log(res.data.message);
-  });
+  });*/
   return (
     <Router>
       <Switch>

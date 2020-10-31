@@ -30,7 +30,7 @@ const Landing = ()=>{
     return( 
         <div className="container">
             <Header />
-            <img src={illustration} className="image1" />
+            <img src={illustration} className="image1" alt="landing-page"/>
             <Tagline />
             <Footer />
         </div> 
