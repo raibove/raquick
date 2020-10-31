@@ -7,7 +7,7 @@ const path = require('path');
 //const cors = require("cors");
 
 const admins = require("./routes/admins");
-const testApiRoutes = require('./routes/testApi');
+//const testApiRoutes = require('./routes/testApi');
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -42,7 +42,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/", admins);
 
-app.use("/",testApiRoutes);
+//app.use("/",testApiRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
