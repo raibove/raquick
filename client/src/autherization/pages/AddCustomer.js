@@ -120,11 +120,11 @@ const AddCustomer = ()=>{
             />
             {formik.touched.cardNo && formik.errors.cardNo ? <div className="input-feedback">{formik.errors.cardNo}</div>: null}            
             
-
+                {console.log(generate)}
             <br />
-            <button type="generate" className="generate" onClick={generateQR} disabled={formik.values.cardNo}>Generate</button>
-            <button type="download" className="download" onClick={downloadQR}>Download</button>
-            <button type="submit" className="submit" disabled={!generate}>Submit</button>
+            <button type="generate" className="generate" onClick={generateQR} disabled={!formik.values.cardNo}>Generate</button>
+            <button type="download" className="download" onClick={downloadQR} disabled={generate==='false'}>Download</button>
+            <button type="submit" className="submit" disabled={generate==='false'}>Submit</button>
         </form>
     </div>;
 }
