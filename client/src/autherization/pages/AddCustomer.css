@@ -63,3 +63,22 @@ input.error {
     outline: none;
     -webkit-appearance: none;
 }
+@media screen and (max-width:500px){
+    label{
+        font-size: 1rem;
+    }
+    input{
+        margin:0.5vh 0;
+        padding: 0;
+        width: 25vw;
+    }
+    #QRCode{
+        visibility: hidden;
+        display: none;
+    }   
+    .submit,.generate,.download{
+        font-size: 0.8rem;
+        padding: 1.5%;
+        margin: 0.8%;
+    }
+}

@@ -14,6 +14,13 @@
     text-decoration-color:wheat;
 }
 
+
+label {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: .5rem;
+}
+
 input {
     margin:2vh 0;
     padding: .5rem;
@@ -44,11 +51,6 @@ input.error {
     font-size: 1.8rem;
     font-weight: 600;
     font-family:'Times New Roman', Times, serif;
-}
-label {
-    font-size: 1.8rem;
-    display: block;
-    margin-bottom: .5rem;
 }
     
 .submit-auth {
@@ -81,5 +83,7 @@ cursor: not-allowed !important;
 }
 
 @media screen and (max-width: 500px) {
-    
+    input{
+        width: 50vw;
+    }
 }
