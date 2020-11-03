@@ -11,6 +11,7 @@ import AgentProfile from './agent/pages/AgentProfile';
 import Customers from './customer/pages/Customers';
 import Scan from './scan/pages/Scan';
 import DisplayStocks from './stock/pages/DisplayStocks';
+import AddCustomer from './autherization/pages/AddCustomer';
 
 /*
 const AgentProfile = React.lazy(() => import('./agent/pages/AgentProfile'));
@@ -30,6 +31,7 @@ const App = ()=> {
     <ProtectedRoute path="/customers/display" component={Customers} exact />
     <ProtectedRoute path="/scan" exact component={Scan}/>
     <ProtectedRoute path="/stocks" component={DisplayStocks} exact />
+    <ProtectedRoute path="/addCustomer" component={AddCustomer} exact/>
     <Redirect to="/"/>
     </Switch>
   return (

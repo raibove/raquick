@@ -22,10 +22,7 @@ const validate = values => {
 
 }
 const Auth = (props)=>{
-    const isAuthenticated = localStorage.getItem('token');
-       
-   
-    
+    const isAuthenticated = localStorage.getItem('token');    
 
     const formik = useFormik({
         initialValues: {
@@ -78,7 +75,6 @@ const Auth = (props)=>{
         <React.Fragment>
             <div className="auth-div">
                 <form onSubmit={formik.handleSubmit}>
-                <fieldset>
                     <legend className="agent-login">Agent Login</legend>
                     <label>Username</label>
                     <input
@@ -88,11 +84,10 @@ const Auth = (props)=>{
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.username}
-                        className={
-                            formik.errors.username && formik.touched.username
-                              ? "text-input error"
-                              : "text-input"
-                          }
+                        className= {formik.errors.username && formik.touched.username
+                              ? 'text-input error'
+                              : 'text-input'
+                        }
                     />
                     {formik.touched.username && formik.errors.username ? <div className="input-feedback">{formik.errors.username}</div>: null}
                     <label>Password</label>
@@ -103,15 +98,13 @@ const Auth = (props)=>{
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.password}
-                        className={
-                            formik.errors.password && formik.touched.password
-                              ? "text-input error"
-                              : "text-input"
-                          }
+                        className= {formik.errors.username && formik.touched.username
+                            ? 'text-input error'
+                            : 'text-input'
+                        }
                     />
                     {formik.touched.password && formik.errors.password ? <div className="input-feedback">{formik.errors.password}</div>: null}
-                    <button type="submit" className="submit">Submit</button>
-                </fieldset>
+                    <button type="submit" className="submit-auth">Submit</button>
                 </form>
             </div>
         </React.Fragment>

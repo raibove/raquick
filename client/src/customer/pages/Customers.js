@@ -9,7 +9,7 @@ import './Customers.css';
 
 const Header = ()=>{
     return(
-        <header className="header-customer"><Link to="/agent"><FontAwesomeIcon icon={faHome} className="home-icon"/></Link><button className="add-customer">Add Customer</button></header>
+        <header className="header-customer"><Link to="/agent"><FontAwesomeIcon icon={faHome} className="home-icon"/></Link><Link to="/addCustomer"><button className="add-customer">Add Customer</button></Link></header>
     );
 };
 

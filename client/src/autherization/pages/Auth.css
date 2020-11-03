@@ -1,5 +1,3 @@
-
-
 .auth-div{
     background-color: #4a41f3;
     color: white;
@@ -53,7 +51,7 @@ label {
     margin-bottom: .5rem;
 }
     
-.submit {
+.submit-auth {
     max-width: 150px;
     margin: 5vh 0;
     padding: 1.5vh 1.8vw;

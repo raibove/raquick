@@ -13,6 +13,7 @@
     "axios": "^0.21.0",
     "formik": "^2.2.1",
     "jwt-decode": "^3.0.0",
+    "qrcode.react": "^1.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-qr-reader": "^2.2.1",
@@ -40,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"http://localhost:5000"
+  "proxy": "http://localhost:5000"
 }

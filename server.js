@@ -7,6 +7,7 @@ const path = require('path');
 //const cors = require("cors");
 
 const admins = require("./routes/admins");
+//const addCustomers = require("./routes/addCustomers")
 //const testApiRoutes = require('./routes/testApi');
 
 const port = process.env.PORT || 5000;
@@ -41,7 +42,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/", admins);
-
+//app.use("/",addCustomers);
 //app.use("/",testApiRoutes);
 
 if (process.env.NODE_ENV === 'production') {
