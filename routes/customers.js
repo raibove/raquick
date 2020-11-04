@@ -7,10 +7,10 @@ const router = express.Router();
 const keys = require("../config/keys");
 
 // model
-const AddCustomers = require('../models/AddCustomers');
+const Customers = require('../models/Customers');
 
 router.post("/addCustomer",(req,res)=>{
-    AddCustomers.findOne({cardNo :req.body.cardNo}).then( customer=>{
+    Customers.findOne({cardNo :req.body.cardNo}).then( customer=>{
         if(customer){
             return res.status(404).json({cardNo: "Customer already exists"});
         }
@@ -29,15 +29,25 @@ router.post("/addCustomer",(req,res)=>{
     })
 });
 
-/*
 router.get('/display',(req,res)=>{
-    AddCustomer.find((), (err, customers)=>{
+    Customers.find({}, (err, customers)=>{
         if(err){
             res.send("Something went really wrong");
         }
-        res.json(customers);
+        res.json({customers: customers.map(customer=> customer.toObject({ getters: true}))});
+        //res.json(customers);
     })
 });
 
-*/
+
+router.post('/scan',(req,res)=>{
+    Customers.findOne({cardNo :req.body.cardNo}).then( customer=>{
+        if(customer){
+            
+        }
+        else{
+            return res.status(404).json({cardNo: "Coustemer not found"});
+        }
+    })
+})
 module.exports = router;

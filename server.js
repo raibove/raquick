@@ -7,8 +7,8 @@ const path = require('path');
 //const cors = require("cors");
 
 const admins = require("./routes/admins");
-const addCustomers = require("./routes/addCustomers");
-const displayCustomers = require("./routes/displayCustomers");
+const addCustomers = require("./routes/customers");
+//const displayCustomers = require("./routes/displayCustomers");
 
 //const testApiRoutes = require('./routes/testApi');
 
@@ -45,7 +45,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/", admins);
 app.use("/",addCustomers);
-app.use("/",displayCustomers)
+//app.use("/",displayCustomers);
 //app.use("/",testApiRoutes);
 
 if (process.env.NODE_ENV === 'production') {

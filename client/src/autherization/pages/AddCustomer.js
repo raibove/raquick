@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {useFormik} from 'formik';
 import QRCode from 'qrcode.react';
 import './AddCustomer.css';
@@ -6,11 +6,9 @@ import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 
-let generate='false';
-let submitClicked='false';
-const generateQR=()=>{
-    generate='true';
-};
+//let generate='false';
+//let submitClicked='false';
+
 
 const downloadQR=()=>{
     const canvas = document.getElementById("QRCode");
@@ -43,6 +41,12 @@ const validate = values =>{
     return errors;
 }
 const AddCustomer = (props)=>{
+    const [isGenrated, setIsGenerated] = useState(false);
+    const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+
+    const generateQR=()=>{
+        setIsGenerated('true');
+     };
 
     const formik = useFormik({
         initialValues:{
@@ -53,7 +57,7 @@ const AddCustomer = (props)=>{
         },
         validate,
         onSubmit: values =>{
-            if(submitClicked==='true'){
+            if(isSubmitClicked==='true'){
             console.log(values.name, values.phone, values.cardNo);
             Axios.post('/addCustomer',{
                 name: values.name,
@@ -65,8 +69,10 @@ const AddCustomer = (props)=>{
                 console.log(response);
                 props.history.push("/customers/display");
             }).catch(error=>{
-                console.log('sign in server error: ')
-                console.log(error.response)
+                console.log('sign in server error: ');
+                console.log(error.response);
+                console.log(error.response.data);
+                alert("Ration card no already exists");
             })
         }
         }
@@ -123,7 +129,7 @@ const AddCustomer = (props)=>{
             />
             {formik.touched.email && formik.errors.email ? <div className="input-feedback">{formik.errors.email}</div>: null}
   
-            {generate==='true'? <QRCode id="QRCode" value={formik.values.cardNo} size={150} level={"H"} includeMargin={true}/>:null}
+            {isGenrated==='true'? <QRCode id="QRCode" value={formik.values.cardNo} size={150} level={"H"} includeMargin={true}/>:null}
   
             <label>Ration Card No</label>
             <input 
@@ -143,8 +149,8 @@ const AddCustomer = (props)=>{
             
             <br />
             <button type="generate" className="generate" onClick={generateQR} disabled={!formik.values.cardNo}>Generate</button>
-            <button type="download" className="download" onClick={downloadQR} disabled={generate==='false'}>Download</button>
-            <button type="submit" className="submit" onClick={()=>submitClicked='true'}  disabled={generate==='false'}>Submit</button>
+            <button type="download" className="download" onClick={downloadQR} disabled={isGenrated==='false'}>Download</button>
+            <button type="submit" className="submit" onClick={()=>setIsSubmitClicked('true')}  disabled={isGenrated ==='false'}>Submit</button>
         </form>
     </div>;
 }

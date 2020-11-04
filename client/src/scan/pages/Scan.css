@@ -4,6 +4,17 @@
     width: 100vw;
 }
 
+.scan{
+    height:20vh;
+    width:20vw;
+    margin:auto;
+    background-color: blueviolet;
+}
+
+
+.result{
+    font-size: 12rem;
+}
 .footer-scan{
     background-color: #4a41f3;
     height: 5vh;
