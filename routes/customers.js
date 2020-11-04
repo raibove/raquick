@@ -15,7 +15,7 @@ router.post("/addCustomer",(req,res)=>{
             return res.status(404).json({cardNo: "Customer already exists"});
         }
         else{
-            const newCustomer = new AddCustomers({
+            const newCustomer = new Customers({
                 name: req.body.name,
                 email: req.body.email,
                 phone: req.body.phone,

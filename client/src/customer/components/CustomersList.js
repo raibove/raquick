@@ -11,14 +11,17 @@ const CustomersList = (props)=> {
         );
     }
     return (
-        <table className="CustomersList">
-            <tbody>
+        <React.Fragment>
+        <div className="wrapper">
+            <table className="CustomersList">
+                <thead>
             <tr>
                 <th>Card NO</th>
                 <th>Name</th>
                 <th>E-mail</th>
                 <th>Phone</th>
             </tr>
+
             {props.items.map(customer => (
                 <CustomerItem 
                     key={customer.id} 
@@ -29,8 +32,10 @@ const CustomersList = (props)=> {
                     email = {customer.email}
                 />
             ))}
-            </tbody>
+            </thead>
         </table>
+        </div>
+        </React.Fragment>
     );
 };
 export default CustomersList;

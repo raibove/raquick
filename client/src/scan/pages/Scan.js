@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import QrReader from "react-qr-reader";
 
 import './Scan.css';
+import Axios from 'axios';
+
 
 const Header = ()=>{
     return(
@@ -30,7 +32,7 @@ const Scan = ()=>{
     }
 
 
-    if(result!=''){
+    if(result!==''){
         Axios.post('/scan',{
             cardNo:result
         })
