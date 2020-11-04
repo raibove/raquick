@@ -2,9 +2,12 @@ import React from 'react';
 import {useFormik} from 'formik';
 import QRCode from 'qrcode.react';
 import './AddCustomer.css';
+import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 
 let generate='false';
+let submitClicked='false';
 const generateQR=()=>{
     generate='true';
 };
@@ -28,26 +31,44 @@ const validate = values =>{
     if(!values.name){
         errors.name = 'Required';
     }
-    if(!values.contact){
-        errors.contact = 'Required';
+    if(!values.phone){
+        errors.phone = 'Required';
     }
     if(!values.cardNo){
         errors.cardNo = 'Required';
     }
-
+    if(!values.email){
+        errors.email = 'Required';
+    }
     return errors;
 }
-const AddCustomer = ()=>{
+const AddCustomer = (props)=>{
 
     const formik = useFormik({
         initialValues:{
         name:'',
-        contact:'',
-        cardNo:''
+        phone:'',
+        cardNo:'',
+        email:''
         },
         validate,
-        onSubmit: (values)=>{
-            console.log(values.name, values.contact, values.cardNo);
+        onSubmit: values =>{
+            if(submitClicked==='true'){
+            console.log(values.name, values.phone, values.cardNo);
+            Axios.post('/addCustomer',{
+                name: values.name,
+                email:values.email,
+                phone: values.phone,
+                cardNo: values.cardNo
+            })
+            .then(response=> {
+                console.log(response);
+                props.history.push("/customers/display");
+            }).catch(error=>{
+                console.log('sign in server error: ')
+                console.log(error.response)
+            })
+        }
         }
     });
 
@@ -102,7 +123,7 @@ const AddCustomer = ()=>{
             />
             {formik.touched.email && formik.errors.email ? <div className="input-feedback">{formik.errors.email}</div>: null}
   
-            {generate==='true'? <QRCode id="QRCode" value={formik.values.cardNo} size={200} level={"H"} includeMargin={true}/>:null}
+            {generate==='true'? <QRCode id="QRCode" value={formik.values.cardNo} size={150} level={"H"} includeMargin={true}/>:null}
   
             <label>Ration Card No</label>
             <input 
@@ -123,9 +144,9 @@ const AddCustomer = ()=>{
             <br />
             <button type="generate" className="generate" onClick={generateQR} disabled={!formik.values.cardNo}>Generate</button>
             <button type="download" className="download" onClick={downloadQR} disabled={generate==='false'}>Download</button>
-            <button type="submit" className="submit" disabled={generate==='false'}>Submit</button>
+            <button type="submit" className="submit" onClick={()=>submitClicked='true'}  disabled={generate==='false'}>Submit</button>
         </form>
     </div>;
 }
 
-export default AddCustomer;
+export default withRouter(AddCustomer);

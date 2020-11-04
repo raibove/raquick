@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import CustomersList from '../components/CustomersList';
+
+import Axios from 'axios';
 
 import './Customers.css';
 
@@ -18,24 +19,67 @@ const Footer = ()=>{
         <footer className="footer-customer"></footer>
     );
 };
-const Customers = ()=>{
-    const CUSTOMERS = [
-        {
-            id:'u1',
-            name:'Anand Kumar', 
-            age:28,
-            email:'anandkam@gmail.com'
-        }
-    ];
+    const Customers = ()=> {
+
+        const [isLoading, setIsLoading] = useState(false);
+        const [loadedCustomers,setLoadedCustomers] = useState([]);
+        
+
+        //var loadedCustomers=[];
+            
+            useEffect(()=> {
+            const sendRequest = async ()=> {
+                setIsLoading(true);
+                let response = await Axios.get('/display' );
+                console.log(typeof(loadedCustomers))
+                //loadedCustomers =  response.data.customers;
+                setLoadedCustomers(response.data.customers)
+                console.log(typeof(loadedCustomers))
+                //loadedCustomers = data.customers;
+                console.log(loadedCustomers);
+                //console.log(loadedCustomers.customers);
+                setIsLoading(false);
+            }
+            sendRequest();
+        },[]);
 
     return (
         <div>
             <Header />
             <h1 className="title">Customers List</h1>
-            <CustomersList items={CUSTOMERS}/>
+
+            {isLoading? <h1>Page is Loading</h1>:<CustomersList items={loadedCustomers}/>}  
             <Footer />
         </div>
         );
 };
 
 export default Customers;
+
+
+/*
+
+Sample data
+  let loadedCustomers =
+             [
+                {
+                    "_id": "5fa18adaaa3bd737449edd4e",
+                    "name": "aplha101",
+                    "email": "alpha101@gmail.com",
+                    "phone": "8888888888",
+                    "cardNo": "141",
+                    "__v": 0,
+                    "id": "5fa18adaaa3bd737449edd4e"
+                },
+                {
+                    "_id": "5fa18adaaa3bd737449edd4f",
+                    "name": "aplha101",
+                    "email": "alpha101@gmail.com",
+                    "phone": "8888888888",
+                    "cardNo": "141",
+                    "__v": 0,
+                    "id": "5fa18adaaa3bd737449edd4f"
+                }
+            ];
+
+*/

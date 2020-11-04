@@ -3,9 +3,10 @@ import './CustomerItem.css'
 const CustomerItem = (props)=>{
     return(
         <tr className="CustomerItem">
+                <td>{props.cardNo}</td>
                 <td>{props.name}</td>
-                <td>{props.age}</td>
                 <td>{props.email}</td>
+                <td>{props.phone}</td>
         </tr>
     );
 };

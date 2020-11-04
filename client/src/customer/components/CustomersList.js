@@ -12,20 +12,24 @@ const CustomersList = (props)=> {
     }
     return (
         <table className="CustomersList">
+            <tbody>
             <tr>
+                <th>Card NO</th>
                 <th>Name</th>
-                <th>Age</th>
                 <th>E-mail</th>
+                <th>Phone</th>
             </tr>
             {props.items.map(customer => (
                 <CustomerItem 
                     key={customer.id} 
                     id={customer.id} 
+                    cardNo={customer.cardNo}
                     name={customer.name} 
-                    age={customer.age}
+                    phone={customer.phone}
                     email = {customer.email}
                 />
             ))}
+            </tbody>
         </table>
     );
 };
