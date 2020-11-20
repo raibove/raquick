@@ -10,17 +10,18 @@ const CustomersList = (props)=> {
             </div>
         );
     }
+
     return (
         <React.Fragment>
         <div className="wrapper">
             <table className="CustomersList">
                 <thead>
-            <tr>
-                <th>Card NO</th>
-                <th>Name</th>
-                <th>E-mail</th>
-                <th>Phone</th>
-            </tr>
+                    <tr>
+                        <th>Card NO</th>
+                        <th>Name</th>
+                        <th>E-mail</th>
+                        <th>Phone</th>
+                    </tr>
 
             {props.items.map(customer => (
                 <CustomerItem 

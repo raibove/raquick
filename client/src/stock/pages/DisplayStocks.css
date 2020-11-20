@@ -1,14 +1,33 @@
 
 .header-stock{
     background-color: #4a41f3;
-    height: 8vh;
+    height: 9.5vh;
     width: 100vw;
 }
 
+.add-stock{
+    float: right;
+    font-size: 1.4rem;
+    margin: 1.5vh;
+    padding: 1.4vh 2.5vw;
+    outline: none;
+    color: #4a41f3;
+    background-color: white;
+    border-radius: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
 .footer-stock{
     background-color: #4a41f3;
     height: 5vh;
     bottom: 0;
     position: fixed;
     width: 100vw;
+}
+
+@media screen and (max-width: 500px) {
+    .add-stock{
+        font-size: 1.15rem;
+        padding: 1.2vh 2.5vw;
+    }
 }

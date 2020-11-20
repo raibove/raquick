@@ -7,7 +7,9 @@ const path = require('path');
 //const cors = require("cors");
 
 const admins = require("./routes/admins");
-const addCustomers = require("./routes/customers");
+const customers = require("./routes/customers");
+const stock = require("./routes/stock");
+
 //const displayCustomers = require("./routes/displayCustomers");
 
 //const testApiRoutes = require('./routes/testApi');
@@ -44,7 +46,8 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/", admins);
-app.use("/",addCustomers);
+app.use("/",customers);
+app.use("/",stock);
 //app.use("/",displayCustomers);
 //app.use("/",testApiRoutes);
 
