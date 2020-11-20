@@ -48,7 +48,7 @@ router.post("/addStk/:id",(req,res)=>{
         res.json(err);
     });
 });
-router.get("/stk/:ïd",(req,res)=>{
+router.get("/stk/:id",(req,res)=>{
     Stock.findOne({_id: req.params.id})
     .populate("amount")
     .then(item=>{
