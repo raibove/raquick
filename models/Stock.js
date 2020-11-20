@@ -1,42 +1,33 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Price = require('./Price');
-const Quantity = require('./Quantity');
+const DemoPrice = require('./DemoPrice');
 //Create Schema
-/*
-const stockSchema = new Schema({
-    detail:{
-        type:Schema.Types.ObjectId,
-        ref:"Quantity"
-    }
-})
 
-const demoStockSchema = new Schema({
+const stockSchema = new Schema({
     productId:{
         type:Number,
         required:true
     },
     product:{
-        type:String,
-        required:true
+        require:true,
+        type:String
     },
     quantity:{
-        type:Number,
-        required:true,
-    },
-    price:{
-        type:Number,
-        required:true
+        require:true,
+        type:Number
     },
     date:{
         type:Date,
         default:Date.now
+    },
+    amount:{
+        type:Schema.Types.ObjectId,
+        ref:"DemoPrice"
     }
-});
-
+})
 const Stock = mongoose.model("stock",stockSchema);
 module.exports = Stock;
 
-*/
+
 //Now after schema is prepared use it in route

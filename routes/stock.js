@@ -5,14 +5,72 @@ const router = express.Router();
 const keys = require("../config/keys");
 
 // model
-//const Stock = require('../models/Stock');
+const Stock = require('../models/Stock');
+const DemoPrice=require('../models/DemoPrice');
+router.get("/stk",(req,res)=>{
+    Stock.find({})
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>{
+        res.json(err);
+    })
+});
+router.get("/prc",(req,res)=>{
+    DemoPrice.find({})
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>{
+        res.json(err);
+    })
+});
+router.post("/addStk",(req,res)=>{
+    Stock.create(req.body)
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>{
+        res.json(err);
+    })
+});
+router.post("/addStk/:id",(req,res)=>{
+    DemoPrice.create(req.body)
+    .then(itemCost=>{
+        return Stock.findOneAndUpdate(
+            {_id: req.params.id},
+            {$set:{price:itemCost._id}});
+    })
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>{
+        res.json(err);
+    });
+});
+router.get("/stk/:ïd",(req,res)=>{
+    Stock.findOne({_id: req.params.id})
+    .populate("amount")
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>{
+        res.json(err);
+    });
+});
+
+
+/**
+ * 
+ * 
+ * CHECK ABOVE CODE 
+ * BELOW CODE WORKS FINE
+ *  
+ * 
+ */
+
 const Price = require('../models/Price');
 const Quantity = require('../models/Quantity');
-/*
-router.post("/addStock",(req,res)=>{
-    Stock.findOne({product})
-});
-*/
 
 //Price
 router.post("/price",(req,res)=>{
@@ -97,9 +155,6 @@ router.get("/stocks",(req,res)=>{
         res.json({items:items.map(item=>item.toObject({getters:true}))});
     })
 })
-module.exports = router;
 
-/*
- .populate("productPrice")
-    .exec();
-*/
+
+module.exports = router;
