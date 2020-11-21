@@ -10,11 +10,11 @@ const productQuantitySchema = new Schema({
         required:true
     },
     product:{
-        require:true,
+        required:true,
         type:String
     },
     quantity:{
-        require:true,
+        required:true,
         type:Number
     },
     date:{

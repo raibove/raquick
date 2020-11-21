@@ -10,11 +10,11 @@ const stockSchema = new Schema({
         required:true
     },
     product:{
-        require:true,
+        required:true,
         type:String
     },
     quantity:{
-        require:true,
+        required:true,
         type:Number
     },
     date:{
@@ -23,7 +23,8 @@ const stockSchema = new Schema({
     },
     amount:{
         type:Schema.Types.ObjectId,
-        ref:"DemoPrice"
+        ref:"DemoPrice",
+        required:true
     }
 })
 const Stock = mongoose.model("stock",stockSchema);

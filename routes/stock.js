@@ -120,24 +120,24 @@ router.post("/stocks/add",(req,res)=>{
             Quantity.updateOne(
                 {_id:item._id},
                 {
-                    $inc:{quantity:req.body.quantity}, $set:{date: new Date()}
+                    $inc:{quantity:req.body.quantity}, $set:{date: new Date().getFullYear()}
                 },
                 (err,response)=>{
                     if(err){
                         console.log(err);
                         throw err;
                     }
-                    console.log("1 document updated");
-                    item=>res.json(item);
+                //console.log("1 document updated");
                 }
                 )
+                .then(item=>res.json(item))
         }
         else{
             const newQuantity= new Quantity({
                 productId:req.body.productId,
                 product:req.body.product,
                 quantity:req.body.quantity,
-                date:new Date() 
+                date:new Date().getFullYear()
             });
             newQuantity.save()
             .then(item=> res.json(item))
