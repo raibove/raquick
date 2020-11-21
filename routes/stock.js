@@ -25,29 +25,85 @@ router.get("/prc",(req,res)=>{
         res.json(err);
     })
 });
-router.post("/addStk",(req,res)=>{
-    Stock.create(req.body)
-    .then(item=>{
-        res.json(item);
-    })
-    .catch(err=>{
-        res.json(err);
+router.post("/addstk",(req,res)=>{
+    Stock.findOne({productId:req.body.productId}).then(item=>{
+        if(item){
+            console.log("Item exist");
+            Stock.updateOne(
+                {_id:item._id},
+                {
+                    $inc:{quantity:req.body.quantity}, $set:{date: new Date().getFullYear()}
+                },
+                (err,response)=>{
+                    if(err){
+                        console.log(err);
+                        throw err;
+                    }
+                })
+                .then(item=>res.json(item))
+        }
+        else{
+            const newStock= new Stock({
+                productId:req.body.productId,
+                product:req.body.product,
+                quantity:req.body.quantity,
+                date:new Date().getFullYear()
+            });
+            newStock.save()
+            .then(item=> res.json(item))
+            .catch(err=>console.log(err))
+        }
     })
 });
-router.post("/addStk/:id",(req,res)=>{
-    DemoPrice.create(req.body)
-    .then(itemCost=>{
-        return Stock.findOneAndUpdate(
-            {_id: req.params.id},
-            {$set:{price:itemCost._id}});
+
+router.post("/addprc",(req,res)=>{
+    DemoPrice.findOne({productId: req.body.productId}).then(item=>{
+        if(item){
+            console.log(item);
+            console.log(item._id)
+            DemoPrice.updateOne(
+                {_id:item._id},
+                {
+                    $set: {
+                        price: req.body.price
+                    }
+                },
+                (err,response)=>{
+                    if(err){
+                        console.log(err);
+                        throw err;
+                    }
+                   // console.log("1 document updated");
+                   
+                }
+            )
+            .then( item=>res.json(item))
+            .catch(err=>res.json(err))
+        }
+        else{
+            const newProduct = new DemoPrice({
+                productId:req.body.productId,
+                price:req.body.price
+            });
+
+            newProduct.save()
+            .then(item=>res.json(item))
+            .catch(err=> console.log(err))
+        }
     })
+});
+
+router.get("/allstk",(req,res)=>{
+    Stock.find({})
+    .populate('amount')
     .then(item=>{
         res.json(item);
     })
     .catch(err=>{
         res.json(err);
     });
-});
+})
+
 router.get("/stk/:id",(req,res)=>{
     Stock.findOne({_id: req.params.id})
     .populate("amount")

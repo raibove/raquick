@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DemoPrice = require('./DemoPrice');
+//const DemoPrice = require('./DemoPrice');
 //Create Schema
 
 const stockSchema = new Schema({
@@ -18,8 +18,7 @@ const stockSchema = new Schema({
         type:Number
     },
     date:{
-        type:Date,
-        default:Date.now
+        type:Date
     },
     amount:{
         type:Schema.Types.ObjectId,
