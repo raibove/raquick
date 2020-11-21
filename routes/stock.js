@@ -70,6 +70,7 @@ router.get("/stk/:id",(req,res)=>{
  */
 
 const Price = require('../models/Price');
+const OnlyPrice = require('../models/OnlyPrice');
 const Quantity = require('../models/Quantity');
 
 //Price
@@ -157,4 +158,68 @@ router.get("/stocks",(req,res)=>{
 })
 
 
+
+//****************************************************************************************** */
+router.get("/lookup",(req,res)=>{
+    Quantity.aggregate([
+        {
+            $lookup:
+            {
+                from:"OnlyPrice",
+                localField:"productId",
+                foreignField:"pId",
+                as:"cost"
+            }
+        }
+    ])
+    .then(item=>{
+        res.json(item);
+    })
+    .catch(err=>res.json(err));
+});
+
+router.post("/onlyprice",(req,res)=>{
+    OnlyPrice.findOne({pId: req.body.pId}).then(item=>{
+        if(item){
+            console.log(item);
+            console.log(item._id)
+            OnlyPrice.updateOne(
+                {_id:item._id},
+                {
+                    $set: {
+                        price: req.body.price
+                    }
+                },
+                (err,response)=>{
+                    if(err){
+                        console.log(err);
+                        throw err;
+                    }
+                    console.log("1 document updated");
+                    item=>res.json(item);
+                }
+            )
+        }
+        else{
+            const newProduct = new OnlyPrice({
+                pId:req.body.pId,
+                price:req.body.price
+            });
+
+            newProduct.save()
+            .then(item=>res.json(item))
+            .catch(err=> console.log(err))
+        }
+    })
+});
+
+
+
+
+
+
+
+
+
 module.exports = router;
+
