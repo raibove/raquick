@@ -4,6 +4,7 @@ import {faHome} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import QrReader from "react-qr-reader";
 
+import { withRouter } from 'react-router-dom';
 import './Scan.css';
 import Axios from 'axios';
 
@@ -19,7 +20,7 @@ const Footer=()=>{
         <footer className="footer-scan"/>
     );
 };
-const Scan = ()=>{
+const Scan = (props)=>{
     const [result,setResult] = useState('');
         
     const handleScan = data => {
@@ -33,11 +34,17 @@ const Scan = ()=>{
 
 
     if(result!==''){
+        console.log(typeof(result));
+        const resInt = parseInt(result);
         Axios.post('/scan',{
             cardNo:result
         })
         .then((response)=>{
             console.log(response);
+            if(response.statusText === "OK"){
+                console.log("OKKKK");
+                props.history.push("/customers/"+result);
+            }
         }).catch(error=>{
             console.log('sign in server error: ');
             console.log(error.response);
@@ -58,4 +65,4 @@ const Scan = ()=>{
         </React.Fragment>
     );
 };
-export default Scan;
+export default withRouter(Scan);

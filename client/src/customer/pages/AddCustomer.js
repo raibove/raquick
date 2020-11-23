@@ -99,7 +99,7 @@ const AddCustomer = (props)=>{
             <label>Phone Number</label>
             <input
               id="phone"
-              type="phone"
+              type="number"
               name="phone"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -134,7 +134,7 @@ const AddCustomer = (props)=>{
             <label>Ration Card No</label>
             <input 
                 id="cardNo"
-                type="cardNo"
+                type="text"
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
                 value={formik.values.cardNo}

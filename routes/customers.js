@@ -43,11 +43,23 @@ router.get('/display',(req,res)=>{
 router.post('/scan',(req,res)=>{
     Customers.findOne({cardNo :req.body.cardNo}).then( customer=>{
         if(customer){
-            
+           res.send(customer);
         }
         else{
             return res.status(404).json({cardNo: "Coustemer not found"});
         }
     })
 })
+
+router.get('/customers/:cardNo',(req,res)=>{
+    Customers.findOne({cardNo: req.params.cardNo}).then(customer=>{
+        if(customer){
+           res.send(customer);
+        }
+        else{
+            return res.status(404).json({cardNo:req.params.cardNo+ " Customer not found"});
+        }
+    })
+})
+
 module.exports = router;
