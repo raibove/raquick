@@ -1,6 +1,6 @@
 .header-scan{
     background-color: #4a41f3;
-    height: 8vh;
+    height: 9vh;
     width: 100vw;
 }
 
@@ -11,7 +11,13 @@
     background-color: blueviolet;
 }
 
-
+.title-scan{
+    padding: 8px 0;
+    font-size: 3rem;
+    text-align: center;
+    color: blue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .result{
     font-size: 12rem;
 }

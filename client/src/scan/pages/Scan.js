@@ -33,9 +33,10 @@ const Scan = (props)=>{
     }
 
 
+    
     if(result!==''){
         console.log(typeof(result));
-        const resInt = parseInt(result);
+       // const resInt = parseInt(result);
         Axios.post('/scan',{
             cardNo:result
         })
@@ -43,17 +44,19 @@ const Scan = (props)=>{
             console.log(response);
             if(response.statusText === "OK"){
                 console.log("OKKKK");
-                props.history.push("/customers/"+result);
+                props.history.push({pathname:"/customers/"+result,state:{cardNo:result}});
             }
         }).catch(error=>{
             console.log('sign in server error: ');
             console.log(error.response);
+            alert("Customer not found");
+            props.history.push("/agent")
         });
     }
     return(
         <React.Fragment>
             <Header />
-            <h1>In Scan QR</h1>
+            <h1 className="title-scan">Scan your QR Code</h1>
             <QrReader
                 delay={0}
                 onError={handleError}

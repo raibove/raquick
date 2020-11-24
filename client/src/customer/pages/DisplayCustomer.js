@@ -1,10 +1,36 @@
 import React,{useEffect, useState}  from 'react';
+import {Link} from 'react-router-dom';
+import {faHome} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './DisplayCustomers.css';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 
+const Header = ()=>{
+    return(
+        <header className="header-dcustomer"><Link to="/agent"><FontAwesomeIcon icon={faHome} className="home-icon"/></Link></header>
+    );
+};
 
+const Footer=()=>{
+    return(
+        <footer className="footer-dcustomer"/>
+    );
+};
+
+const CustInfo = (props)=>{
+    return(
+        <div>
+            <h1 className="title-customer">Customer Info</h1>
+            <p className="info"> Name: {props.data.name} <br/>
+                Card No: {props.data.cardNo} <br />
+                E-mail: {props.data.email} <br />
+                Phone-no: {props.data.phone}
+            </p>
+        </div>
+    );
+}
 const DisplayCustomers = (props)=>{
 
     const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +38,10 @@ const DisplayCustomers = (props)=>{
     useEffect(()=> {
         const sendRequest = async ()=> {
             setIsLoading(true);
-             let response = await Axios.get('/customers/1' );
+            console.log("props:  "+props.data);
+            let card = props.location.state.cardNo;
+            console.log("Card:   "+card);
+            let response = await Axios.get('/customers/'+card );
             console.log(response);
             console.log(response.data);
             setLoadedProfile(response.data);
@@ -23,7 +52,9 @@ const DisplayCustomers = (props)=>{
 
     return(
         <div>
-            {isLoading? <h1>Page is Loading</h1>:<h1>Loaded {loadedProfile.name}</h1>}  
+            <Header />
+            {isLoading? <h1>Page is Loading</h1>:<CustInfo data={loadedProfile}/>}  
+            <Footer />
         </div>
     )};
 export default withRouter(DisplayCustomers);
