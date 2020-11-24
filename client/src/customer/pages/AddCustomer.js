@@ -74,8 +74,7 @@ const AddCustomer = (props)=>{
                 console.log(error.response.data);
                 alert("Ration card no already exists");
             })
-        }
-        }
+        }}
     });
 
     return <div className="container-customer">

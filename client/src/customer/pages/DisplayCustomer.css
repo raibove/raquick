@@ -1,6 +1,6 @@
 .header-dcustomer{
     background-color: #4a41f3;
-    height: 9vh;
+    height: 10vh;
     width: 100vw;
 }
 
@@ -12,6 +12,18 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.place-order{
+    float: right;
+    font-size: 1.4rem;
+    margin: 2vh;
+    padding: 1.4vh 2vw;
+    outline: none;
+    color: #4a41f3;
+    background-color: white;
+    border-radius: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
 .info{
     padding: 2vh 0;
     text-align: center;
@@ -25,4 +37,12 @@
     bottom: 0;
     position: fixed;
     width: 100vw;
+}
+
+
+@media screen and (max-width: 500px) {
+.place-order{
+    font-size: 1.15rem;
+    padding: 1.2vh 2.5vw;
+}
 }

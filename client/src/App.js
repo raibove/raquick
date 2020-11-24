@@ -13,7 +13,9 @@ import Scan from './scan/pages/Scan';
 import DisplayStocks from './stock/pages/DisplayStocks';
 import AddCustomer from './customer/pages/AddCustomer';
 import AddStock from './stock/pages/AddStock';
-import DisplayCustomers from './customer/pages/DisplayCustomer';
+import DisplayCustomer from './customer/pages/DisplayCustomer';
+import PlaceOrder from './order/pages/PlaceOrder';
+
 /*
 const AgentProfile = React.lazy(() => import('./agent/pages/AgentProfile'));
 const Customers = React.lazy(()=> import('./customer/pages/Customers'));
@@ -34,7 +36,8 @@ const App = ()=> {
     <ProtectedRoute path="/stocks" component={DisplayStocks} exact />
     <ProtectedRoute path="/addCustomer" component={AddCustomer} exact/>
     <ProtectedRoute path="/stocks/add" component={AddStock} exact />
-    <ProtectedRoute path="/customers/:cardNo" component={DisplayCustomers} exact />
+    <ProtectedRoute path="/customers/:cardNo" component={DisplayCustomer} exact />
+    <ProtectedRoute path="/placeOrder" component={PlaceOrder} exact />
     <Redirect to="/"/>
     </Switch>
   return (
