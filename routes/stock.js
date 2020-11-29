@@ -5,8 +5,8 @@ const router = express.Router();
 const keys = require("../config/keys");
 
 // model
-const Stock = require('../models/Stock');
-const DemoPrice=require('../models/DemoPrice');
+const {Stock} = require('../models/Stock');
+const {DemoPrice}=require('../models/Stock');
 router.get("/stk",(req,res)=>{
     Stock.find({})
     .then(item=>{
@@ -28,7 +28,7 @@ router.get("/prc",(req,res)=>{
 router.post("/addstk",(req,res)=>{
     Stock.findOne({productId:req.body.productId}).then(item=>{
         if(item){
-            console.log("Item exist");
+            //console.log("Item exist");
             Stock.updateOne(
                 {_id:item._id},
                 {
@@ -59,8 +59,8 @@ router.post("/addstk",(req,res)=>{
 router.post("/addprc",(req,res)=>{
     DemoPrice.findOne({productId: req.body.productId}).then(item=>{
         if(item){
-            console.log(item);
-            console.log(item._id)
+           // console.log(item);
+            //console.log(item._id)
             DemoPrice.updateOne(
                 {_id:item._id},
                 {
@@ -73,8 +73,6 @@ router.post("/addprc",(req,res)=>{
                         console.log(err);
                         throw err;
                     }
-                   // console.log("1 document updated");
-                   
                 }
             )
             .then( item=>res.json(item))
@@ -88,31 +86,18 @@ router.post("/addprc",(req,res)=>{
 
             newProduct.save()
             .then(item=>res.json(item))
-            .catch(err=> console.log(err))
+            .catch(err=> res.log(err))
         }
     })
 });
 
-router.get("/allstk",(req,res)=>{
-    Stock.find({})
-    .populate('amount')
-    .then(item=>{
-        res.json(item);
-    })
-    .catch(err=>{
-        res.json(err);
-    });
-})
-
-router.get("/stk/:id",(req,res)=>{
-    Stock.findOne({_id: req.params.id})
-    .populate("amount")
-    .then(item=>{
-        res.json(item);
-    })
-    .catch(err=>{
-        res.json(err);
-    });
+router.get("/pp",(req,res)=>{
+    Stock.find({}).populate("cost").exec((err, data)=> {
+        if(err){
+           res.send(err);
+       }
+       res.send(data);
+     });
 });
 
 

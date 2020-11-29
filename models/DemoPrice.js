@@ -13,5 +13,14 @@ const productPriceSchema = new Schema({
         required:true
     }
 });
+
+productPriceSchema.virtual('mike', {
+    ref: 'Stock',
+    localField: 'productId',
+    foreignField: 'productId'
+  });
+  
+productPriceSchema.set('toObject', { virtuals: true });
+productPriceSchema.set('toJSON', { virtuals: true });
 const DemoPrice = mongoose.model("demoPrice",productPriceSchema);
 module.exports= DemoPrice;

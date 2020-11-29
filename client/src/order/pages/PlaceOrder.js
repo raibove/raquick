@@ -17,7 +17,7 @@ const validate= values =>{
     }
     return errors;
 }
-const PlaceOrder = ()=>{
+const PlaceOrder = (props)=>{
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
     const formik = useFormik({
@@ -29,7 +29,27 @@ const PlaceOrder = ()=>{
         validate,
         onSubmit: values=>{
             if(isSubmitClicked === 'true'){
-                console.log(values);
+                //console.log(values);
+                Axios.post('/placeOrder',{
+                    Rice: values.rice,
+                    Wheat: values.wheat,
+                    Sugar: values.sugar
+                })
+                .then(response=>{
+                    console.log(response);
+                    if(response.status===205){
+                        console.log(response.data);
+                        alert("Out of stock");
+                    }
+                    else{
+                    alert('Order placed');
+                    props.history.push('/agent');
+                    }
+                }).catch(error=>{
+                    console.log('Order place error: ');
+                    console.log(error.response);
+                    console.log(error.response.data);
+                })
             }
         }
     });
@@ -67,7 +87,7 @@ const PlaceOrder = ()=>{
                 }
                 autoComplete="off"
             />
-            {formik.touched.wheat && formik.touched.wheat ? <div className="input-feedback">{formik.errors.wheat}</div>:null}
+            {formik.touched.wheat && formik.errors.wheat ? <div className="input-feedback">{formik.errors.wheat}</div>:null}
 
             <label>Sugar</label>
             <input
@@ -78,17 +98,17 @@ const PlaceOrder = ()=>{
                 onBlur={formik.handleBlur}
                 value={formik.values.sugar}
                 className={
-                    formik.errors.sugar && formik.errors.sugar
+                    formik.touched.sugar && formik.errors.sugar
                     ? 'text-input error'
                     : 'text-input'
                 }
                 autoComplete="off"
             />
-            {formik.touched.sugar && formik.touched.sugar ? <div className='input-feedback'>{formik.errors.sugar}</div>:null}
+            {formik.touched.sugar && formik.errors.sugar ? <div className='input-feedback'>{formik.errors.sugar}</div>:null}
             <br />
             <button type="submit" className="submit" onClick={()=>setIsSubmitClicked('true')}>Submit</button>
         </form>
     </div>
 }
 
-export default PlaceOrder;
+export default withRouter(PlaceOrder);
