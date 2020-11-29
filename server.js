@@ -9,7 +9,6 @@ const path = require('path');
 const admins = require("./routes/admins");
 const customers = require("./routes/customers");
 const stock = require("./routes/stock");
-const blog = require("./routes/blog");
 //const displayCustomers = require("./routes/displayCustomers");
 
 //const testApiRoutes = require('./routes/testApi');
@@ -48,7 +47,6 @@ require("./config/passport")(passport);
 app.use("/", admins);
 app.use("/",customers);
 app.use("/",stock);
-app.use("/",blog);
 //app.use("/",displayCustomers);
 //app.use("/",testApiRoutes);
 
