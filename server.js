@@ -1,64 +1,58 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require("mongoose");
-const passport = require("passport");
-const path = require('path');
+const passport = require('passport');
 
-//const cors = require("cors");
+const mongoose = require('mongoose');
 
-const admins = require("./routes/admins");
-const customers = require("./routes/customers");
-const stock = require("./routes/stock");
-const blog = require("./routes/blog");
-//const displayCustomers = require("./routes/displayCustomers");
-
-//const testApiRoutes = require('./routes/testApi');
-
-const port = process.env.PORT || 5000;
-const app = express();
-
-// Bodyparser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
+const passportConfig = require('./config/passport');
 
 // DB Config
-const db = require("./config/keys").mongoURL;
+const db = require('./config/keys').DB_LOCAL;
+
+const app = require('./app');
+
+//Catching Uncaught Exceptions
+
+process.on('uncaughtException', (err) => {
+  console.log(err.name, err.message);
+
+  console.log('UNCAUGHT EXCEPTION! Shutting Down');
+
+  process.exit(1);
+});
+
+// Passport
+
+app.use(passport.initialize());
+
+// Passport config
+passportConfig(passport);
+
+const port = process.env.PORT || 5000;
 
 // Connect to MongoDB
+
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('MongoDB successfully connected'))
+  .catch((err) => console.log(err));
 
-//app.use(cors());
+//Listening on Port 5000
 
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
+const server = app.listen(port, () =>
+  console.log(`Server up and running on port ${port} !`)
+);
 
+//Catching UNHANDLED Rejections
 
-// Routes
-app.use("/", admins);
-app.use("/",customers);
-app.use("/",stock);
-app.use("/",blog);
-//app.use("/",displayCustomers);
-//app.use("/",testApiRoutes);
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
 
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  // Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  console.log('UNHANDLED REJECTION! Shutting Down');
+
+  server.close(() => {
+    process.exit(1);
   });
-}
-
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));   
+});
