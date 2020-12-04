@@ -1,45 +1,37 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require("mongoose");
-const passport = require("passport");
-const path = require('path');
+const passport = require('passport');
 
-//const cors = require("cors");
+const mongoose = require('mongoose');
+
+const passportConfig = require('./config/passport');
 
 const admins = require("./routes/admins");
 const customers = require("./routes/customers");
 const stock = require("./routes/stock");
-//const displayCustomers = require("./routes/displayCustomers");
+//const displayCustomers = require("./routes/displayCustomers")
+//DB Config
+const db = require('./config/keys').DB_LOCAL;
 
-//const testApiRoutes = require('./routes/testApi');
+const app = require('./app');
+
+//Catching Uncaught Exceptions
+
+process.on('uncaughtException', (err) => {
+  console.log(err.name, err.message);
+
+  console.log('UNCAUGHT EXCEPTION! Shutting Down');
+
+  process.exit(1);
+});
+
+// Passport
+
+app.use(passport.initialize());
+
+// Passport config
+
+passportConfig(passport);
 
 const port = process.env.PORT || 5000;
-const app = express();
-
-// Bodyparser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// DB Config
-const db = require("./config/keys").mongoURL;
-
-// Connect to MongoDB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  )
-  .then(() => console.log("MongoDB successfully connected"))
-  .catch(err => console.log(err));
-
-//app.use(cors());
-
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
 require("./config/passport")(passport);
 
 
@@ -59,4 +51,32 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port, () => console.log(`Server up and running on port ${port} !`));   
+
+// Connect to MongoDB
+
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log('MongoDB successfully connected'))
+  .catch((err) => console.log(err));
+
+//Listening on Port 5000
+
+const server = app.listen(port, () =>
+  console.log(`Server up and running on port ${port} !`)
+);
+
+//Catching UNHANDLED Rejections
+
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
+
+  console.log('UNHANDLED REJECTION! Shutting Down');
+
+  server.close(() => {
+    process.exit(1);
+  });
+});

@@ -1695,6 +1695,11 @@ setprototypeof@1.1.1:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
 
+short-unique-id@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/short-unique-id/-/short-unique-id-3.2.0.tgz#e7bc1c01908495a61b8613201a018c9a3db4a0e7"
+  integrity sha512-CAO0U4AOJs/3R8tFz+pt8WIscxQte0VZ6DXD0E413p/ujpa/KNdRGwVSmTiGNWOBvSiThVcG0wm8zaWHAZcCsA==
+
 sift@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"

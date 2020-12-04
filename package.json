@@ -7,7 +7,7 @@
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "client": "cd client && npm start",
-    "server": "nodemon server.js",
+    "server": "NODE_ENV=development nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "author": "Shweta Kale",
@@ -21,7 +21,8 @@
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "short-unique-id": "^3.2.0"
   },
   "devDependencies": {
     "concurrently": "^5.3.0"
