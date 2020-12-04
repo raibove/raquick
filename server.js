@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 
 const passportConfig = require('./config/passport');
 
-// DB Config
+const admins = require("./routes/admins");
+const customers = require("./routes/customers");
+const stock = require("./routes/stock");
+//const displayCustomers = require("./routes/displayCustomers")
+//DB Config
 const db = require('./config/keys').DB_LOCAL;
 
 const app = require('./app');
@@ -24,9 +28,29 @@ process.on('uncaughtException', (err) => {
 app.use(passport.initialize());
 
 // Passport config
+
 passportConfig(passport);
 
 const port = process.env.PORT || 5000;
+require("./config/passport")(passport);
+
+
+// Routes
+app.use("/", admins);
+app.use("/",customers);
+app.use("/",stock);
+//app.use("/",displayCustomers);
+//app.use("/",testApiRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
+
 
 // Connect to MongoDB
 
