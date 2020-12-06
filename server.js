@@ -4,15 +4,10 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const path = require('path');
 
-//const cors = require("cors");
-
 const admins = require("./routes/admins");
 const customers = require("./routes/customers");
 const stock = require("./routes/stock");
 const order = require("./routes/order");
-//const displayCustomers = require("./routes/displayCustomers");
-
-//const testApiRoutes = require('./routes/testApi');
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -36,7 +31,6 @@ mongoose
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
 
-//app.use(cors());
 
 // Passport middleware
 app.use(passport.initialize());
@@ -49,8 +43,6 @@ app.use("/", admins);
 app.use("/",customers);
 app.use("/",stock);
 app.use("/",order);
-//app.use("/",displayCustomers);
-//app.use("/",testApiRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

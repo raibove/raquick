@@ -18,18 +18,13 @@ const productQuantitySchema = new Schema({
         type:Number
     },
     date:{
-        type:Date,
+        type:String,
         default:Date.now
+    },
+    price:{
+        type:Number
     }
 });
 
 const prouctQuantity = mongoose.model("quantity",productQuantitySchema);
 module.exports= prouctQuantity;
-
-/*
-,
-    productPrice:{
-        type:Schema.Types.ObjectId,
-        ref:"Price"
-    }
-*/

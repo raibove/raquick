@@ -1,0 +1,26 @@
+.formAddStock{
+    background-color:rgb(253, 235, 212);
+    width: 100vw;
+    height: 100vh;
+    margin:0vh auto;
+    padding:10vh 20%;
+}
+
+.product{
+    font-size: 1.2rem;
+}
+
+.quantity{
+    padding:1vh 0;
+    margin-top: 2vh;
+}
+.stock-submit{
+    padding:1% 2%;
+    margin:2.5%;
+    color: white;
+    font-size: 1.3rem;
+    background-color: red;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+}

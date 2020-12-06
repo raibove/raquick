@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { model } = require('./OnlyPrice');
 const Schema = mongoose.Schema;
 
 //Create Schema

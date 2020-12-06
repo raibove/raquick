@@ -18,6 +18,7 @@ const StockList = (props)=>{
                 <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Quantity</th>
                     <th>Price</th>
                     <th>Date</th>
                 </tr>
@@ -28,6 +29,7 @@ const StockList = (props)=>{
                             key={item._id}
                             product={item.product} 
                             quantity={item.quantity}
+                            price={item.price}
                             date={item.date}
                         />
                     )}

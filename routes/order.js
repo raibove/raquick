@@ -5,7 +5,6 @@ const router = express.Router();
 const keys = require("../config/keys");
 
 // model
-const Price = require('../models/Price');
 const Quantity = require('../models/Quantity');
 const Order = require('../models/Order');
 

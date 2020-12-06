@@ -44,8 +44,9 @@ const AddStock = (props)=>{
     });
     return(
         <div>
-        <h1>Add items</h1>
-        <form onSubmit={formik.handleSubmit} autoComplete="off">
+       
+        <form onSubmit={formik.handleSubmit} class="formAddStock" autoComplete="off">
+        <h1>Add item:</h1>
             <label>Product</label>
             <select
                 name="product"
@@ -53,6 +54,7 @@ const AddStock = (props)=>{
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 style={{ display: 'block' }}
+                class="product"
             >
                 <option value="" label="Select a product" />
                 <option value="Rice" label="Rice"/>
@@ -69,6 +71,7 @@ const AddStock = (props)=>{
                 onBlur={formik.handleBlur}
                 value={formik.values.quantity}
                 autoComplete="off"
+                class="quantity"
             />
             {formik.touched.quantity && formik.errors.quantity? <div>{formik.errors.quantity}</div>:null}
             <button type="submit" className="stock-submit" onClick={()=> setIsSubmitClicked(true)}>Submit</button>
