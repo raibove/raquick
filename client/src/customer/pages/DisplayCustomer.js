@@ -38,6 +38,8 @@ const DisplayCustomer = (props)=>{
     useEffect(()=> {
         const sendRequest = async ()=> {
             setIsLoading(true);
+            console.log("prop.location "+ props.location);
+         
             let card = props.location.state.cardNo;
             console.log("Card:   "+card);
             let response = await Axios.get('/customers/'+card );

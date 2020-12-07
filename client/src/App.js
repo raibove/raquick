@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
-//import Axios from "axios";
 import './App.css';
 
 import ProtectedRoute from './ProtectedRoutes';
@@ -15,14 +14,7 @@ import AddCustomer from './customer/pages/AddCustomer';
 import AddStock from './stock/pages/AddStock';
 import DisplayCustomer from './customer/pages/DisplayCustomer';
 import PlaceOrder from './order/pages/PlaceOrder';
-
-/*
-const AgentProfile = React.lazy(() => import('./agent/pages/AgentProfile'));
-const Customers = React.lazy(()=> import('./customer/pages/Customers'));
-const Scan = React.lazy(()=> import('./scan/pages/Scan'));
-const DisplayStocks = React.lazy(()=> import('./stock/pages/DisplayStocks'));
-*/
-
+import OrderInfo from './order/pages/OrderInfo';
 
 const App = ()=> {
   const routes = <Switch>
@@ -37,6 +29,7 @@ const App = ()=> {
     <ProtectedRoute path="/addCustomer" component={AddCustomer} exact/>
     <ProtectedRoute path="/stocks/add" component={AddStock} exact />
     <ProtectedRoute path="/customers/:cardNo" component={DisplayCustomer} exact />
+    <ProtectedRoute path="/order/:orderNo" component={OrderInfo} exact />
     <ProtectedRoute path="/placeOrder" component={PlaceOrder} exact />
     <Redirect to="/"/>
     </Switch>

@@ -1,0 +1,14 @@
+.header-order{
+    background-color: #4a41f3;
+    height: 10vh;
+    width: 100vw;
+}
+
+
+.footer-order{
+    background-color: #4a41f3;
+    height: 5vh;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+}

@@ -5,9 +5,9 @@ const StockItem =(props)=>{
     return(
         <tr className="StockItem">
             <td>{props.product}</td>
+            <td>{props.date}</td>
             <td>{props.quantity}</td>
             <td>{props.price}</td>
-            <td>{props.date}</td>
         </tr>
     );
 };

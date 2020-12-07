@@ -18,9 +18,9 @@ const StockList = (props)=>{
                 <thead>
                 <tr>
                     <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Date</th>
+                    <th>Date Added</th>
+                    <th>Quantity (kg)</th>
+                    <th>Price/kg</th>
                 </tr>
 
                 {

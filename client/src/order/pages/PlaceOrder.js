@@ -43,7 +43,8 @@ const PlaceOrder = (props)=>{
                     }
                     else{
                     alert('Order placed');
-                    props.history.push('/agent');
+                    console.log("/order"+response.data.orderId);
+                    props.history.push({pathname:"/order/"+response.data.orderId,state:{ordr:response.data}});
                     }
                 }).catch(error=>{
                     console.log('Order place error: ');

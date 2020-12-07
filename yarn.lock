@@ -1512,6 +1512,11 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-simple-invoice@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-simple-invoice/-/react-simple-invoice-1.0.12.tgz#d2342825e3ec9836d1e6f15a13bc032c53d25355"
+  integrity sha512-Xt1uB5Xm5RRo8KVKv6pjKwWdL7Fwi9NRY4BpTIo5t/rdBj8mQ9u/BhAexMJzNaKNjJgcxGToZcudPX3rbkYkDw==
+
 read-pkg@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-4.0.1.tgz#963625378f3e1c4d48c85872b5a6ec7d5d093237"
@@ -1694,6 +1699,11 @@ setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
+
+short-unique-id@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/short-unique-id/-/short-unique-id-3.2.0.tgz#e7bc1c01908495a61b8613201a018c9a3db4a0e7"
+  integrity sha512-CAO0U4AOJs/3R8tFz+pt8WIscxQte0VZ6DXD0E413p/ujpa/KNdRGwVSmTiGNWOBvSiThVcG0wm8zaWHAZcCsA==
 
 sift@7.0.1:
   version "7.0.1"
