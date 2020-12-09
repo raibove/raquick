@@ -13,16 +13,22 @@
   "author": "Shweta Kale",
   "license": "ISC",
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.1.2",
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
+    "numeral": "^2.0.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-moment": "^1.0.0",
     "react-simple-invoice": "^1.0.12",
+    "react-spinners": "^0.9.0",
     "short-unique-id": "^3.2.0"
   },
   "devDependencies": {

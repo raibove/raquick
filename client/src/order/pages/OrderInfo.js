@@ -1,12 +1,9 @@
 import React,{useEffect, useState}  from 'react';
 import {Link} from 'react-router-dom';
-import {faHome} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faWindowRestore} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './OrderInfo.css';
 import {useLocation} from 'react-router-dom'
-
-import { renderToStaticMarkup } from 'react-dom/server';
-//import {Invoice} from 'react-simple-invoice';
 
 const Header = ()=>{
     return(
@@ -15,6 +12,9 @@ const Header = ()=>{
 };
 
 const Table = (props)=>{
+
+  
+
     const ordr = props.ordr;
     return(
 
@@ -25,8 +25,10 @@ const Table = (props)=>{
                     <th>Product</th>
                     <th>Quantity (kg)</th>
                     <th>Rate /kg</th>
-                    <th>Amount</th>
+                    <th>Amount ₹</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
                     <td>Wheat</td>
                     <td>{ordr.wheat}</td>
@@ -43,12 +45,21 @@ const Table = (props)=>{
                     <td>Sugar</td>
                     <td>{ordr.sugar}</td>
                     <td>{ordr.sugarCost}</td>
-                    <td>{ordr.sugar * ordr.sugarCost}</td>
+                    <td >{ordr.sugar * ordr.sugarCost}</td>
                     </tr>
-                </thead>
+                </tbody>               
+                <tfoot >
+                    <tr>
+                    <td colspan="3">Total Amount</td>
+                    <td>{ordr.sugar * ordr.sugarCost + ordr.wheat * ordr.wheatCost + ordr.rice * ordr.riceCost}</td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 )}
+
+
+
 
 const Footer = ()=>{
     return(
@@ -64,10 +75,10 @@ const ordr = location.state.ordr;
     return(
         <div>
             <Header />
-            <h1>Order</h1>
-            <h1>Order No: {ordr.orderId}</h1>
+            <h1 className="title">Bill</h1>
+            <h1 className="order-no">Order No: {ordr.orderId}</h1>
             <Table ordr={ordr}/>
-            <button>Pay</button>
+            <button className="hide-on-print prnt" onClick={() => window.print()}>Print</button>
             <Footer />
         </div>
     )}

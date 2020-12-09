@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomersList from '../components/CustomersList';
 
 import Axios from 'axios';
+import Loading from '../../shared/components/Loading';
 
 import './Customers.css';
 
@@ -48,7 +49,7 @@ const Footer = ()=>{
             <Header />
             <h1 className="title">Customers List</h1>
 
-            {isLoading? <h1>Page is Loading</h1>:<CustomersList items={loadedCustomers}/>}  
+            {isLoading? <Loading/>:<CustomersList items={loadedCustomers}/>}  
             <Footer />
         </div>
         );

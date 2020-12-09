@@ -12,3 +12,41 @@
     position: fixed;
     width: 100vw;
 }
+.prnt{
+    font-size: 1.3rem;
+    padding: 0.8% 1.1%;
+    float: right;
+    margin: 3% 10%;
+    color: white;
+    background-color: #4a41f3;
+}
+
+.order-no{
+    font-size:1.5rem;
+    color:black;
+    margin-left: 5%;
+}
+table {
+     border-collapse: collapse;
+
+   }
+thead tr th{
+    border: 1px black solid !important;   
+}
+tbody tr td{
+    border: 1px black solid !important;   
+    
+}
+  
+tfoot tr td{
+    border: 1px black solid !important;   
+
+    font-weight: bold;
+   }
+
+
+@media print{
+    .hide-on-print{
+		display: none;
+	}
+}

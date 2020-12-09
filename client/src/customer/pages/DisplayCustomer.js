@@ -6,7 +6,7 @@ import './DisplayCustomer.css';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-
+import Loading from '../../shared/components/Loading';
 const Header = ()=>{
     return(
         <header className="header-dcustomer"><Link to="/agent"><FontAwesomeIcon icon={faHome} className="home-icon"/></Link><Link to="/placeOrder"><button className="place-order">Place Order</button></Link></header>
@@ -54,7 +54,7 @@ const DisplayCustomer = (props)=>{
     return(
         <div>
             <Header />
-            {isLoading? <h1>Page is Loading</h1>:<CustInfo data={loadedProfile}/>}  
+            {isLoading? <Loading />:<CustInfo data={loadedProfile}/>}  
             <Footer />
         </div>
     )};

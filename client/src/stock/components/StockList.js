@@ -22,7 +22,8 @@ const StockList = (props)=>{
                     <th>Quantity (kg)</th>
                     <th>Price/kg</th>
                 </tr>
-
+                </thead>
+                <tbody>
                 {
                     props.items.map(item=>
                         <StockItem
@@ -33,7 +34,7 @@ const StockList = (props)=>{
                             date={item.date}
                         />
                     )}
-                    </thead>
+                    </tbody>
             </table>
         </div>
     </React.Fragment>

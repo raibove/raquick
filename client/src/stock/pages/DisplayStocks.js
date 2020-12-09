@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import CustomersList from '../components/StockList';
 import './DisplayStocks.css';
 import Axios from 'axios';
+import Loading from '../../shared/components/Loading';
+
 const Header =()=>{
     return(
         <header className="header-stock"><Link to="/agent"><FontAwesomeIcon icon={faHome} className="home-icon" /></Link><Link to="/stocks/add"><button className="add-stock">Add Stock</button></Link></header>
@@ -34,8 +36,8 @@ const DisplayStocks = ()=>{
     },[])
     return <React.Fragment>
         <Header />
-        <h2>Stock Available</h2>
-        {isLoading? <h1>Page is Loading</h1>:<CustomersList items={loadedStock}/>}  
+        <h2  className="title">Stock Available</h2>
+        {isLoading?<Loading />:<CustomersList items={loadedStock}/>}  
         <Footer />
     </React.Fragment>
 };

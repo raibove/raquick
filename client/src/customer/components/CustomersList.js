@@ -22,7 +22,8 @@ const CustomersList = (props)=> {
                         <th>E-mail</th>
                         <th>Phone</th>
                     </tr>
-
+                </thead>
+                <tbody>
             {props.items.map(customer => (
                 <CustomerItem 
                     key={customer.id} 
@@ -33,7 +34,7 @@ const CustomersList = (props)=> {
                     email = {customer.email}
                 />
             ))}
-            </thead>
+            </tbody>
         </table>
         </div>
         </React.Fragment>
