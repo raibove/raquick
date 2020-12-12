@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {faHome, faWindowRestore} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './OrderInfo.css';
-import {useLocation} from 'react-router-dom'
+import { useHistory ,withRouter,Redirect , useLocation} from 'react-router-dom'
 
 const Header = ()=>{
     return(
@@ -30,28 +30,28 @@ const Table = (props)=>{
                     </thead>
                     <tbody>
                     <tr>
-                    <td>Wheat</td>
-                    <td>{ordr.wheat}</td>
-                    <td>{ordr.wheatCost}</td>
-                    <td>{ordr.wheat * ordr.wheatCost}</td>
+                    <td>{ordr.product[0]}</td>
+                    <td>{ordr.inputQuantity[0]}</td>
+                    <td>{ordr.price[0]}</td>
+                    <td>{ordr.inputQuantity[0] * ordr.price[0]}</td>
                     </tr>
                     <tr>
-                    <td>Rice</td>
-                    <td>{ordr.rice}</td>
-                    <td>{ordr.riceCost}</td>
-                    <td>{ordr.rice * ordr.riceCost}</td>
+                    <td>{ordr.product[1]}</td>
+                    <td>{ordr.inputQuantity[1]}</td>
+                    <td>{ordr.price[1]}</td>
+                    <td>{ordr.inputQuantity[1] * ordr.price[1]}</td>
                     </tr>
                     <tr>
-                    <td>Sugar</td>
-                    <td>{ordr.sugar}</td>
-                    <td>{ordr.sugarCost}</td>
-                    <td >{ordr.sugar * ordr.sugarCost}</td>
+                    <td>{ordr.product[2]}</td>
+                    <td>{ordr.inputQuantity[2]}</td>
+                    <td>{ordr.price[2]}</td>
+                    <td>{ordr.inputQuantity[2] * ordr.price[2]}</td>
                     </tr>
                 </tbody>               
                 <tfoot >
                     <tr>
                     <td colspan="3">Total Amount</td>
-                    <td>{ordr.sugar * ordr.sugarCost + ordr.wheat * ordr.wheatCost + ordr.rice * ordr.riceCost}</td>
+                    <td>{ordr.inputQuantity[0] * ordr.price[0] + ordr.inputQuantity[1] * ordr.price[1] + ordr.inputQuantity[2] * ordr.price[2]}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -68,19 +68,33 @@ const Footer = ()=>{
 };
 
 
-const OrderInfo = (props)=>{
+const OrderInfo = ( )=>{
+    const history = useHistory();
+    const PrintClicked = ()=>{
+        let path = `/agent`;
+   
+        window.print();
+        history.push(path);
+        //props.history.push("/agent");
+    };
 
+const isScanned = localStorage.getItem('isScanned');
 const location = useLocation()
 const ordr = location.state.ordr;
-    return(
+console.log("isScanned"+isScanned);
+    return isScanned ? (
         <div>
             <Header />
             <h1 className="title">Bill</h1>
+            <h1 className="card-no">Card No: {ordr.cardNo}</h1>
             <h1 className="order-no">Order No: {ordr.orderId}</h1>
             <Table ordr={ordr}/>
-            <button className="hide-on-print prnt" onClick={() => window.print()}>Print</button>
+            <button className="hide-on-print prnt" onClick={PrintClicked}>Print</button>
             <Footer />
         </div>
-    )}
+    ) : (
+        <Redirect to="/agent" />
+    )
+}
 
 export default OrderInfo;

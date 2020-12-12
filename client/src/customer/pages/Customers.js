@@ -48,7 +48,6 @@ const Footer = ()=>{
         <div>
             <Header />
             <h1 className="title">Customers List</h1>
-
             {isLoading? <Loading/>:<CustomersList items={loadedCustomers}/>}  
             <Footer />
         </div>
@@ -56,31 +55,3 @@ const Footer = ()=>{
 };
 
 export default Customers;
-
-
-/*
-
-Sample data
-  let loadedCustomers =
-             [
-                {
-                    "_id": "5fa18adaaa3bd737449edd4e",
-                    "name": "aplha101",
-                    "email": "alpha101@gmail.com",
-                    "phone": "8888888888",
-                    "cardNo": "141",
-                    "__v": 0,
-                    "id": "5fa18adaaa3bd737449edd4e"
-                },
-                {
-                    "_id": "5fa18adaaa3bd737449edd4f",
-                    "name": "aplha101",
-                    "email": "alpha101@gmail.com",
-                    "phone": "8888888888",
-                    "cardNo": "141",
-                    "__v": 0,
-                    "id": "5fa18adaaa3bd737449edd4f"
-                }
-            ];
-
-*/

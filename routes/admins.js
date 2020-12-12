@@ -6,12 +6,8 @@ const jwt = require("jsonwebtoken");
 //keys for mongo atlas
 const keys = require("../config/keys");
 
-
-
 //for user model
 const Admin = require("../models/Admin");
-
-
 
 
 router.post("/register", (req,res)=> {
@@ -51,7 +47,6 @@ For Login
 ////////////////////
 
 router.post("/auth",(req,res,next)=> {
-
     const username = req.body.username;
     const password = req.body.password;
     Admin.findOne({ username }).then(admin => {
@@ -60,10 +55,7 @@ router.post("/auth",(req,res,next)=> {
         if(!admin){
             return res.status(404).json({usernamenotfound: "Username not found"});
         }
-
-
         // check password
-        
         bcrypt.compare(password,admin.password).then(isMatch => {
             if(isMatch){
                 // admin matched create jwt payload

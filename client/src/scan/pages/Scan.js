@@ -44,11 +44,14 @@ const Scan = (props)=>{
             console.log(response);
             if(response.statusText === "OK"){
                 console.log("OKKKK");
+                localStorage.setItem('cardNo',result);
+                localStorage.setItem('isScanned','true');
                 props.history.push({pathname:"/customers/"+result,state:{cardNo:result}});
             }
         }).catch(error=>{
             console.log('sign in server error: ');
             console.log(error.response);
+            
             alert("Customer not found");
             props.history.push("/agent")
         });

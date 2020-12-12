@@ -4,7 +4,7 @@ import {faHome} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './DisplayCustomer.css';
 import Axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter,Redirect } from 'react-router-dom';
 
 import Loading from '../../shared/components/Loading';
 const Header = ()=>{
@@ -32,7 +32,7 @@ const CustInfo = (props)=>{
     );
 }
 const DisplayCustomer = (props)=>{
-
+    const isScanned = localStorage.getItem('isScanned');
     const [isLoading, setIsLoading] = useState(false);
     const [loadedProfile,setLoadedProfile] = useState([]);
     useEffect(()=> {
@@ -43,19 +43,20 @@ const DisplayCustomer = (props)=>{
             let card = props.location.state.cardNo;
             console.log("Card:   "+card);
             let response = await Axios.get('/customers/'+card );
-            //console.log(response);
-            //console.log(response.data);
+  
             setLoadedProfile(response.data);
             setIsLoading(false);
         }
         sendRequest();
     },[])
 
-    return(
+    return isScanned ? (
         <div>
             <Header />
             {isLoading? <Loading />:<CustInfo data={loadedProfile}/>}  
             <Footer />
         </div>
+    ): (
+        <Redirect to="/agent" />
     )};
 export default withRouter(DisplayCustomer);

@@ -23,8 +23,6 @@ router.post("/stocks/add",(req,res)=>{
                         console.log(err);
                         throw err;
                     }
-                    // d.setTime(d.getTime() - (d.getTimezoneOffset() * 60 * 1000))
-                //console.log("1 document updated");
                 }
                 )
                 .then(item=>res.json(item))

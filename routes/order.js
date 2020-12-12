@@ -1,18 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
+
 //keys for mongo atlas
 const keys = require("../config/keys");
 
 // model
 const Quantity = require('../models/Quantity');
-const Order = require('../models/Order');
-
-router.post("/placeOrder",(req,res)=>{
+const Ordr = require('../models/Ordr');
+router.post("/placeOrder",(req,res)=>{ 
     Quantity.find({}).then(item=>{
-        
-        let rice=0,wheat=0,sugar=0,sugarCost=0,riceCost=0,wheatCost=0,totalCost=0;
+        let rice=0,wheat=0,sugar=0,sugarCost=0,riceCost=0,wheatCost=0;
         if(item){
+           // console.log(req.body.length);
             for(let i=0;i<item.length;i++){
                 if(item[i].product==='Wheat'){
                     wheat = req.body.Wheat;
@@ -44,14 +44,19 @@ router.post("/placeOrder",(req,res)=>{
                     .catch(err=>console.log("error: "+err))
                 } 
             }
-            //console.log("item"+item);
-            const ordr = new Order({rice: rice,wheat: wheat,sugar:sugar,riceCost:riceCost,sugarCost:sugarCost,wheatCost:wheatCost,totalCost: (wheat*wheatCost + rice*riceCost + sugar*sugarCost)});
+           
+            const ordr = new Ordr({
+                product: ['Rice','Wheat','Sugar'],
+                inputQuantity : [rice,wheat,sugar],
+                price: [riceCost,wheatCost,sugarCost],
+                totalCost: (wheat*wheatCost + rice*riceCost + sugar*sugarCost),
+                cardNo: req.body.cardNo
+            })
             ordr.save((err)=>{
                 if(err){
                     return handleError(err);
                 }
             })
-            
             return res.send(ordr);
         }
         else{
@@ -59,8 +64,12 @@ router.post("/placeOrder",(req,res)=>{
         }
     }
     ).catch(err=>res.json(err))
-})
-router.get('/order/:orderNo',(req,res)=>{
-    Order.findOne({})
 });
+
+/*
+router.get('/order/:orderNo',(req,res)=>{
+
+});
+*/
+
 module.exports = router;

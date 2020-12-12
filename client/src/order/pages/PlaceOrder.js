@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {useFormik} from 'formik';
 import './PlaceOrder.css';
 import Axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter,Redirect } from 'react-router-dom';
 
 const validate= values =>{
     const errors = {};
@@ -18,7 +18,10 @@ const validate= values =>{
     return errors;
 }
 const PlaceOrder = (props)=>{
+
     const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+    const isScanned = localStorage.getItem('isScanned');
+    const cardNo = localStorage.getItem('cardNo');
 
     const formik = useFormik({
         initialValues:{
@@ -29,11 +32,12 @@ const PlaceOrder = (props)=>{
         validate,
         onSubmit: values=>{
             if(isSubmitClicked === 'true'){
-                //console.log(values);
+                
                 Axios.post('/placeOrder',{
                     Rice: values.rice,
                     Wheat: values.wheat,
-                    Sugar: values.sugar
+                    Sugar: values.sugar,
+                    cardNo: cardNo
                 })
                 .then(response=>{
                     console.log(response);
@@ -42,8 +46,8 @@ const PlaceOrder = (props)=>{
                         alert("Out of stock");
                     }
                     else{
-                    alert('Order placed');
-                    console.log("/order"+response.data.orderId);
+                    //alert('Order placed');
+                    //console.log("/order"+response.data.orderId);
                     props.history.push({pathname:"/order/"+response.data.orderId,state:{ordr:response.data}});
                     }
                 }).catch(error=>{
@@ -54,7 +58,9 @@ const PlaceOrder = (props)=>{
             }
         }
     });
-    return <div className="container-order">
+    console.log("isScanned "+isScanned);
+
+    return isScanned ? (<div className="container-order">
         <form onSubmit={formik.handleSubmit} autoComplete="off">
             <label>Rice</label>
             <input 
@@ -110,6 +116,8 @@ const PlaceOrder = (props)=>{
             <button type="submit" className="submit" onClick={()=>setIsSubmitClicked('true')}>Submit</button>
         </form>
     </div>
-}
+    ) : (
+        <Redirect to="/agent" />
+    )}
 
 export default withRouter(PlaceOrder);

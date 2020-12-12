@@ -24,6 +24,8 @@ const Buttons = ()=>{
     );
 };
 const AgentProfile = (props)=>{
+   localStorage.removeItem('isScanned');
+
     return(
         <div  className="main-page">
             <button className="sign-out" onClick={()=>{localStorage.removeItem('token'); props.history.push('/'); }}>Sign-Out</button>

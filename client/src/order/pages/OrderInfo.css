@@ -20,7 +20,11 @@
     color: white;
     background-color: #4a41f3;
 }
-
+.card-no{
+    font-size:1.5rem;
+    color:black;
+    margin-left: 5%;
+}
 .order-no{
     font-size:1.5rem;
     color:black;
